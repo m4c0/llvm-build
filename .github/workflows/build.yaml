@@ -1,0 +1,26 @@
+name: build-llvm
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    steps:
+      - name: 🛒 Checkout LLVM
+        uses: actions/checkout@v3
+        with:
+          repository: llvm/llvm-project
+          path: llvm-project
+          tag: llvmorg-16.0.6
+      - name: 🛠️ Setup CMAKE
+        run: >
+          cmake
+          -DCMAKE_BUILD_TYPE=Release
+          -DLLVM_ENABLE_ASSERTIONS=OFF
+          -DCMAKE_INSTALL_PREFIX=install
+          -S llvm_project/llvm
+          -B build
+      - name: 🏃 Run CMAKE
+        run: cmake --build build --config Release
+      - name: ❤️  Install LLVM
+        run: cmake --build build --target install --config Release
+
