@@ -4,6 +4,12 @@ on:
   
 jobs:
   build:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: 🛒 Checkout LLVM
         uses: actions/checkout@v3
