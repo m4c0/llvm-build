@@ -23,7 +23,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=Release
           -DLLVM_ENABLE_ASSERTIONS=OFF
           -DCMAKE_INSTALL_PREFIX=install
-          -S llvm_project/llvm
+          -S llvm-project/llvm
           -B build
       - name: 🏃 Run CMAKE
         run: cmake --build build --config Release
