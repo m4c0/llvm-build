@@ -1,7 +1,7 @@
 name: build-llvm
 on:
   workflow_dispatch:
-  
+    
 jobs:
   build:
     strategy:
@@ -10,13 +10,16 @@ jobs:
           - macos-latest
           - windows-latest
     runs-on: ${{ matrix.os }}
+    env:
+      TAG: 16.0.6
+      ZIP: llvm-${{ matrix.os }}
     steps:
       - name: 🛒 Checkout LLVM
         uses: actions/checkout@v3
         with:
           repository: llvm/llvm-project
           path: llvm-project
-          tag: llvmorg-16.0.6
+          tag: llvmorg-${{ env.TAG }}
       - name: 🛠️ Setup CMAKE
         run: >
           cmake
@@ -29,4 +32,8 @@ jobs:
         run: cmake --build build --config Release
       - name: ❤️  Install LLVM
         run: cmake --build build --target install --config Release
+      - name: 📦 Create package
+        run: zip ${{ env.ZIP }} install
+      - name: 🚀 Update release
+        run: gh release upload --clobber v${{ env.TAG }} ${{ env.ZIP }}
 
