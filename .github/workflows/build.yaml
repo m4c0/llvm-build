@@ -33,7 +33,7 @@ jobs:
       - name: ❤️  Install LLVM
         run: cmake --build build --target install --config Release
       - name: 📦 Create package
-        run: zip ${{ env.ZIP }} install
+        run: 7z a -tzip ${{ env.ZIP }} install
       - name: 🚀 Update release
         run: gh release upload --clobber v${{ env.TAG }} ${{ env.ZIP }}
 
