@@ -11,6 +11,7 @@ jobs:
           - windows-latest
     runs-on: ${{ matrix.os }}
     env:
+      GH_TOKEN: ${{ github.token }}
       TAG: 16.0.6
       ZIP: llvm-${{ matrix.os }}
     steps:
