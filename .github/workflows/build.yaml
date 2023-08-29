@@ -13,7 +13,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       TAG: 16.0.6
-      ZIP: llvm-${{ matrix.os }}
+      ZIP: llvm-${{ matrix.os }}.zip
     steps:
       - name: 🛒 Checkout LLVM
         uses: actions/checkout@v3
