@@ -15,6 +15,8 @@ jobs:
       TAG: 16.0.6
       ZIP: llvm-${{ matrix.os }}.zip
     steps:
+      - name: 🏥 Sanity checks
+        run: gh release view v${{ env.TAG }} -R ${{ github.repository }}
       - name: 🛒 Checkout LLVM
         uses: actions/checkout@v3
         with:
@@ -36,5 +38,5 @@ jobs:
       - name: 📦 Create package
         run: 7z a -tzip ${{ env.ZIP }} install
       - name: 🚀 Update release
-        run: gh release upload --clobber v${{ env.TAG }} ${{ env.ZIP }}
+        run: gh release upload --clobber v${{ env.TAG }} ${{ env.ZIP }} -R ${{ github.repository }}
 
