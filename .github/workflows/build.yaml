@@ -34,6 +34,8 @@ jobs:
           -DLLVM_ENABLE_RUNTIMES="compiler-rt;libc;libcxx;libcxxabi;libunwind"
           -DLLVM_ENABLE_ASSERTIONS=OFF
           -DCMAKE_INSTALL_PREFIX=install
+          -DLLVM_BUILD_TOOLS=OFF
+          -DLLVM_INCLUDE_EXAMPLES=OFF
           -S llvm-project/llvm
           -B build
       - name: 🏃 Run CMAKE
